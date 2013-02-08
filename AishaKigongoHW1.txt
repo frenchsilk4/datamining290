@@ -1,0 +1,13 @@
+
+  1. What are the types of data available to you?
+  	English premier league football and match betting data.
+
+  2. For data sets how many recoeds are in the data set? 761
+
+  3. Provide an interesting record, explain its properties and why it is interesting. 
+	On December, 31st, 2011 Manchester United, my football team played Blackburn and annoyingly Blackburn won the game. But whats interesting is in the odds of the game. Blackburn had a 2 goal handicap and when you analyze the betting odds, there is a big variance between the betting houses.  For example VC Bet house gave away win odds of 29 to 1.12 in contrast Interwetten has given away win odds of 14 to 1.12 from this a user can get a sense of which house to place there bets to maximize there returns. I found all this interesting because the betting world is new to me. 
+
+	4. What 3 questions you could answer using your data?
+		1. Do bookmakers have an affinity for a particular team?
+		2. How  much risk are bookmakers likely to take on derby matches?
+		3. How many red cards has a refree on average given per season. 
