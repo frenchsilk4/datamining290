@@ -17,6 +17,9 @@ class UniqueReview(MRJob):
             # for word in ____:
             #   yield [ ___ , ___ ]
             ##/
+            revId = record['review_id']
+            for word in WORD_RE.findall(record['text']):
+                yield [word.lower(), revId]
 
     def count_reviews(self, word, review_ids):
         """Count the number of reviews a word has appeared in.  If it is a
@@ -29,28 +32,31 @@ class UniqueReview(MRJob):
         # if ___:
         #     yield [ ___ , ___ ]
         ##/
-
+	if len(unique_reviews)== 1:
+            yield [unique_reviews.pop(), 1]
+	
     def count_unique_words(self, review_id, unique_word_counts):
         """Output the number of unique words for a given review_id"""
         ###
         # TODO: summarize unique_word_counts and output the result
         # 
         ##/
+        yield [review_id, sum(unique_word_counts)]	
 
     def aggregate_max(self, review_id, unique_word_count):
-        """Group reviews/counts together by the MAX statistic."""
+        """Group reviews/counts together by the MAX statistic.""i"""
         ###
         # TODO: By yielding using the same keyword, all records will appear in
         # the same reducer:
-        # yield ["MAX", [ ___ , ___]]
+        yield ["MAX", [unique_word_count, review_id]]
         ##/
 
     def select_max(self, stat, count_review_ids):
-        """Given a list of pairs: [count, review_id], select on the pair with
-        the maximum count, and output the result."""
+        yield max(count_review_ids)
+        """Given a list of pairs: [count, review_id], select on the pair with the maximum count, and output the result."""
         ###
         # TODO: find the review with the highest count, yield the review_id and
-        # the count. HINT: the max() function will compare pairs by the first
+        # the count. HINT: the max() function will compare pairs by the firsti
         # number
         #
         #/
