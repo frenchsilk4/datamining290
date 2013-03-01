@@ -16,10 +16,12 @@ receipt_desc, memo_cd, memo_text, form_tp, file_num, tran_id, election_tp) = ran
 # TODO: declare datastructures
 
 ############### Read through files
-pcnt = Counter()
-zipcnt = Counter()
-temp2 = 0.0
-zipDict = Collections.defaultdict(Counter)
+pcnt = collections.Counter()
+zipcnt = collections.Counter()
+temp = 0.0
+zipDict = collections.defaultdict(collections.Counter)
+sumOfCandVist=0.0
+
  ###
 # TODO: calculate the values below:
 gini = 0  # current Gini Index using candidate name as the class
@@ -33,25 +35,26 @@ for row in csv.reader(fileinput.input()):
 
         row[cand_nm], row[contbr_zip]
         candidate = row[cand_nm]
-
+        zipCode = row[contbr_zip][:5]
         pcnt[candidate] = +1
-        zipDict['contbr_zip'] += Counter([row[cand_nm]])
+        zipDict[zipCode] += collections.Counter([row[cand_nm]])
 
         ##/
 # sum of all the candidates in the Data set
 sumOfCandidates = sum(pcnt.values())
 
 # Calculating current Gini Index using candidate name as the class
-for val in pcnt.values:
-	 temp += val/float(sumOfCandidates))**2
-gini = 1 - temp2
+for val in pcnt.values():
+	 temp += (val/float(sumOfCandidates))**2
+gini = 1 - temp
 
 # Calculating the weighted average of the Gini Indexes using candidate names, split up by zip codes
 for eachZip in zipDict.values():
 	candsVistByzip = sum(eachZip.values())
 	for eachCand in eachZip.values():
-		sumOfCandVist += (eachCand/ float candVistByzip)**2
+		sumOfCandVist += (eachCand/ float (candsVistByzip))**2
 	split_gini += (candsVistByzip/sumOfCandidates)*(1-sumOfCandVist)
 
+# print the Gini Index and the Gini Index after split
 print "Gini Index: %s" % gini
 print "Gini Index after split: %s" % split_gini
