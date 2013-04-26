@@ -1,0 +1,1 @@
+Results1. Price elasticity Weekday : -1.7632. Price elasticity Weekend : -1.43693. Max revenue	* Weekday : $149.43	* Weekend : $163.58The full working is included in the hw-price-elasticity.xlsx file attached. 
